@@ -30,6 +30,10 @@ public class BacklogDevelopmentService {
         return backlogDevelopmentRepo.findAll();
     }
 
+    public List<BacklogDevelopment> getBacklogDevelopmentByStatus(String status){
+        return backlogDevelopmentRepo.getBacklogDevelopmentByStatus(status);
+    }
+
     public BacklogDevelopment getBacklogDevelopment(String backlog_code) throws BacklogDevelopmentException{
         BacklogDevelopment backlogDev = backlogDevelopmentRepo.findByBacklog_code(backlog_code).orElseThrow(() -> new BacklogDevelopmentException("Backlog Development Not Found"));
         return backlogDev;

@@ -16,6 +16,9 @@ public interface BacklogDevelopmentRepo extends JpaRepository<BacklogDevelopment
     @Query(value = "SELECT u FROM BacklogDevelopment u WHERE u.backlog_code = :backlog_code")
     Optional<BacklogDevelopment> findByBacklog_code(@Param("backlog_code") String backlog_code);
 
+    @Query(value = "SELECT u FROM BacklogDevelopment u WHERE u.backlog_status = :status")
+    List<BacklogDevelopment> getBacklogDevelopmentByStatus(@Param("status") String status);
+
     @Override
     @Query("SELECT u FROM BacklogDevelopment u WHERE u.backlog_status = 'KIC' OR u.backlog_status = 'DEV'  ")
     List<BacklogDevelopment> findAll();

@@ -23,6 +23,11 @@ public class BacklogDevelopmentController {
         return backlogDevelopmentService.getAllBacklogDevelopment();
     }
 
+    @GetMapping("/getByStatus/{status}")
+    public List<BacklogDevelopment> getBacklogDevelopmentByStatus(@PathVariable("status") String status){
+        return backlogDevelopmentService.getBacklogDevelopmentByStatus(status);
+    }
+
     @GetMapping("/get/{code}")
     public BacklogDevelopment getBacklogDev(@PathVariable("code") String code){
         return backlogDevelopmentService.getBacklogDevelopment(code);
