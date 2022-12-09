@@ -28,6 +28,7 @@ public class RoleService {
     }
 
     public Role addRole(Role role){
+        role.setRole_name(role.getRole_name().toUpperCase());
         role.setCreated_date(new Date());
         return roleRepo.save(role);
     }
