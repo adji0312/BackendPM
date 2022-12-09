@@ -15,11 +15,11 @@ public interface ProjectPICRepo extends JpaRepository<ProjectPIC, Long> {
     @Query(value = "SELECT u FROM ProjectPIC u WHERE u.pic_id = :picID AND u.project_code = :project_code")
     Optional<ProjectPIC> findProjectPICByPICId(@Param("project_code") String project_code, @Param("picID") String picID);
 
-//    @Query(value = "SELECT u FROM ProjectPIC u WHERE u.pic_id = :picID")
-//    Optional<ProjectPIC> findProjectPICByPICId(@Param("picID") String picID);
+    @Query(value = "SELECT p FROM ProjectPIC p JOIN User u ON p.pic_id = u.user_id WHERE p.project_code = :project_code AND u.role.role_name = 'DEV'")
+    List<ProjectPIC> findProjectPICDev(@Param("project_code") String project_code);
 
-    @Query(value = "SELECT u FROM ProjectPIC u WHERE u.project_code = :project_code")
-    List<ProjectPIC> findProjectPICByProjectCode(@Param("project_code") String project_code);
+    @Query(value = "SELECT p FROM ProjectPIC p JOIN User u ON p.pic_id = u.user_id WHERE p.project_code = :project_code AND u.role.role_name = 'PRO LEAD'")
+    ProjectPIC findProjectPICPM(@Param("project_code") String project_code);
 
     @Modifying
     @Query(value = "DELETE FROM ProjectPIC u WHERE u.project_code = :project_code")

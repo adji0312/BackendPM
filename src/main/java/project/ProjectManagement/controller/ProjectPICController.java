@@ -24,11 +24,16 @@ public class ProjectPICController {
     @PostMapping("/add/{project_code}/{user_id}")
     public ResponseEntity<ProjectPIC> addProjectPIC(@PathVariable("project_code") String project_code, @PathVariable("user_id") String user_id){
         ProjectPIC newProjectPIC = projectPICService.addPIC(project_code, user_id);
-//        System.out.println(newProjectPIC);
         if(newProjectPIC == null){
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(newProjectPIC,HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getPICPM/{project_code}")
+    public ResponseEntity<ProjectPIC> getProjectPICPM(@PathVariable("project_code") String project_code){
+        ProjectPIC findPICPM = projectPICService.getProjectPICPM(project_code);
+        return new ResponseEntity<>(findPICPM, HttpStatus.OK);
     }
 
     @GetMapping("/get/{project_code}/{user_id}")
@@ -38,7 +43,7 @@ public class ProjectPICController {
     }
 
     @GetMapping("/getPICDev/{project_code}")
-    public List<ProjectPIC> getProjectPICByProjectCode(@PathVariable("project_code") String project_code){
+    public List<ProjectPIC> getProjectPICDev(@PathVariable("project_code") String project_code){
         return projectPICService.getProjectPICDev(project_code);
     }
 

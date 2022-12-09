@@ -35,6 +35,10 @@ public class ProjectPICService {
         return projectPICRepo.findProjectPICByPICId( project_code, user_id).orElseThrow( () -> new ProjectPICNotFoundException("Project PIC Not Found"));
     }
 
+    public ProjectPIC getProjectPICPM(String project_code){
+        return projectPICRepo.findProjectPICPM(project_code);
+    }
+
     public ProjectPIC addPIC(String project_code, String user_id) {
 
         Optional<ProjectPIC> projectPIC = projectPICRepo.findProjectPICByPICId(project_code, user_id);
@@ -87,7 +91,7 @@ public class ProjectPICService {
 
 
     public List<ProjectPIC> getProjectPICDev(String project_code){
-        return projectPICRepo.findProjectPICByProjectCode(project_code);
+        return projectPICRepo.findProjectPICDev(project_code);
     }
 
     public void deletePIC(String project_code, String user_id){
