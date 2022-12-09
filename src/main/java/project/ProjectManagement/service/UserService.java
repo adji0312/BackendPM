@@ -63,6 +63,10 @@ public class UserService {
         return userRepo.findUserById(id).orElseThrow(() -> new UserNotFoundException("User Not Found"));
     }
 
+    public List<User> getUserByRole(String role){
+        return userRepo.findUserByRole(role);
+    }
+
     public User getUserByUserID(String userID){
         return userRepo.findByUserID(userID).orElseThrow(() -> new UserNotFoundException("User Not Found"));
     }

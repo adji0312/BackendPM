@@ -37,6 +37,12 @@ public class UserController {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
+    @GetMapping("/getByRole/{role}")
+    public ResponseEntity<List<User>> getUserById(@PathVariable("role") String role) {
+        List<User> findUserByRole = userService.getUserByRole(role);
+        return new ResponseEntity<>(findUserByRole, HttpStatus.OK);
+    }
+
     @GetMapping("/get/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         User user = userService.getUserById(id);
@@ -65,6 +71,12 @@ public class UserController {
     public ResponseEntity<User> deleteUser(@PathVariable("id") Long id){
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getuser")
+    public ResponseEntity<User> getUser(Principal principal){
+        User user = userService.getUserByUID(principal.getName());
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
 }
