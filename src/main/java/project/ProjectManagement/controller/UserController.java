@@ -9,6 +9,7 @@ import project.ProjectManagement.model.User;
 import project.ProjectManagement.service.UserService;
 //import project.ProjectManagement.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -46,6 +47,12 @@ public class UserController {
     public ResponseEntity<User> getUserByUserId(@PathVariable("userID") String userID) {
         User user = userService.getUserByUserID(userID);
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getuser")
+    public ResponseEntity<User> getUser(Principal principal){
+        User user = userService.getUserByUID(principal.getName());
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")

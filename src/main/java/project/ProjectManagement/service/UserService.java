@@ -93,6 +93,10 @@ public class UserService {
         return userRepo.save(user);
     }
 
+    public User getUserByUID(String userid) {
+        return userRepo.findUserID(userid);
+    }
+
 //    public User getUserID(String userid){
 //        return userRepo.findUserID(userid);
 //    }
