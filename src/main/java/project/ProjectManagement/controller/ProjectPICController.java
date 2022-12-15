@@ -21,13 +21,22 @@ public class ProjectPICController {
         this.projectPICService = projectPICService;
     }
 
-    @PostMapping("/add/{project_code}/{user_id}")
-    public ResponseEntity<ProjectPIC> addProjectPIC(@PathVariable("project_code") String project_code, @PathVariable("user_id") String user_id){
-        ProjectPIC newProjectPIC = projectPICService.addPIC(project_code, user_id);
-        if(newProjectPIC == null){
+    @PostMapping("/addPICDev/{project_code}/{user_id}")
+    public ResponseEntity<ProjectPIC> addPICDev(@PathVariable("project_code") String project_code, @PathVariable("user_id") String user_id){
+        ProjectPIC newPICDev = projectPICService.addPICDev(project_code, user_id);
+        if(newPICDev == null){
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(newProjectPIC,HttpStatus.CREATED);
+        return new ResponseEntity<>(newPICDev,HttpStatus.CREATED);
+    }
+
+    @PostMapping("/addPICPM/{project_code}/{user_id}")
+    public ResponseEntity<ProjectPIC> addPICPM(@PathVariable("project_code") String project_code, @PathVariable("user_id") String user_id){
+        ProjectPIC newPICPM = projectPICService.addPICPM(project_code, user_id);
+        if(newPICPM == null){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(newPICPM,HttpStatus.CREATED);
     }
 
     @GetMapping("/getPICPM/{project_code}")

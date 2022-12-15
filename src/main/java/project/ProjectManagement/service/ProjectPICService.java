@@ -39,19 +39,42 @@ public class ProjectPICService {
         return projectPICRepo.findProjectPICPM(project_code);
     }
 
-    public ProjectPIC addPIC(String project_code, String user_id) {
 
-        Optional<ProjectPIC> projectPIC = projectPICRepo.findProjectPICByPICId(project_code, user_id);
+    public ProjectPIC addPICPM(String project_code, String user_id){
+        ProjectPIC picPM = projectPICRepo.findProjectPICPM(project_code);
+        User findUser = userRepo.findByUserID(user_id).orElseThrow(() -> new UserNotFoundException("User Not Found"));
+
+        if(picPM == null){
+            ProjectPIC newPICPM = new ProjectPIC();
+            newPICPM.setPic_name(findUser.getUser_name());
+            newPICPM.setPic_id(findUser.getUser_id());
+            newPICPM.setProject_code(project_code);
+            newPICPM.setCreated_date(new Date());
+
+            return projectPICRepo.save(newPICPM);
+        }else{
+            ProjectPIC updatedPICPM = projectPICRepo.findProjectPICPM(project_code);
+            updatedPICPM.setPic_id(user_id);
+            updatedPICPM.setPic_name(findUser.getUser_name());
+            updatedPICPM.setModify_date(new Date());
+
+            return projectPICRepo.save(updatedPICPM);
+        }
+    }
+
+    public ProjectPIC addPICDev(String project_code, String user_id) {
+
+        Optional<ProjectPIC> picDev = projectPICRepo.findProjectPICByPICId(project_code, user_id);
         User findUser = userRepo.findByUserID(user_id).orElseThrow(() -> new UserNotFoundException("User Not Found"));
 
 
-        if(projectPIC.isEmpty()){
+        if(picDev.isEmpty()){
             //Create PIC
-            ProjectPIC newPIC = new ProjectPIC();
-            newPIC.setPic_name(findUser.getUser_name());
-            newPIC.setPic_id(findUser.getUser_id());
-            newPIC.setProject_code(project_code);
-            newPIC.setCreated_date(new Date());
+            ProjectPIC newPICDev = new ProjectPIC();
+            newPICDev.setPic_name(findUser.getUser_name());
+            newPICDev.setPic_id(findUser.getUser_id());
+            newPICDev.setProject_code(project_code);
+            newPICDev.setCreated_date(new Date());
 
             Optional<PIConProject> findPIConProject = picOnProjectRepo.findByPICId(user_id);
 
@@ -75,7 +98,7 @@ public class ProjectPICService {
                }
            }
 
-            return projectPICRepo.save(newPIC);
+            return projectPICRepo.save(newPICDev);
 
         }else{
             //Update PIC
@@ -86,7 +109,6 @@ public class ProjectPICService {
 
             return projectPICRepo.save(updatedPIC);
         }
-
     }
 
 

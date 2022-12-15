@@ -1,7 +1,7 @@
 package project.ProjectManagement.repo.listfiltermanagement;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import project.ProjectManagement.model.listfiltermanagement.ApplicationOperatingSystem;
+import project.ProjectManagement.model.TableManagement.ApplicationOperatingSystem;
 
 import java.util.Optional;
 

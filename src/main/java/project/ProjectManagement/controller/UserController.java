@@ -73,10 +73,4 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/getuser")
-    public ResponseEntity<User> getUser(Principal principal){
-        User user = userService.getUserByUID(principal.getName());
-        return new ResponseEntity<User>(user, HttpStatus.OK);
-    }
-
 }

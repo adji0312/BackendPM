@@ -40,17 +40,19 @@ public class BacklogDevelopment implements Serializable {
 
     private Date backlog_kickoff;
 
-    @Column(length = 3)
+    @Column(length = 20)
     private String backlog_status;
 
     private Date backlog_start;
 
     private Date backlog_end;
 
+    private String pic_PM;
+
     public BacklogDevelopment(){
     }
 
-    public BacklogDevelopment(Long id, String created_by, Date created_date, String modify_by, Date modify_date, String application, String backlog_type, String backlog_code, String backlog_bpro, String backlog_desc, Date backlog_kickoff, String backlog_status, Date backlog_start, Date backlog_end) {
+    public BacklogDevelopment(Long id, String created_by, Date created_date, String modify_by, Date modify_date, String application, String backlog_type, String backlog_code, String backlog_bpro, String backlog_desc, Date backlog_kickoff, String backlog_status, Date backlog_start, Date backlog_end, String pic_PM) {
         this.id = id;
         this.created_by = created_by;
         this.created_date = created_date;
@@ -65,6 +67,7 @@ public class BacklogDevelopment implements Serializable {
         this.backlog_status = backlog_status;
         this.backlog_start = backlog_start;
         this.backlog_end = backlog_end;
+        this.pic_PM = pic_PM;
     }
 
     public Long getId() {
@@ -177,6 +180,14 @@ public class BacklogDevelopment implements Serializable {
 
     public void setBacklog_end(Date backlog_end) {
         this.backlog_end = backlog_end;
+    }
+
+    public String getPic_PM() {
+        return pic_PM;
+    }
+
+    public void setPic_PM(String pic_PM) {
+        this.pic_PM = pic_PM;
     }
 
     @Override

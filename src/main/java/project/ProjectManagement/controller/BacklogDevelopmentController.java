@@ -39,6 +39,11 @@ public class BacklogDevelopmentController {
         return new ResponseEntity<>(backlogDevelopment, HttpStatus.OK);
     }
 
+    @GetMapping("/count/{status}")
+    public List<Long> countBacklogByStatus(@PathVariable("status") String status){
+        return backlogDevelopmentService.countBacklogByStatus(status);
+    }
+
     @DeleteMapping("/delete/{backlog_code}")
     public ResponseEntity<BacklogDevelopment> deleteBacklogDevelopment(@PathVariable("backlog_code") String backlog_code){
         backlogDevelopmentService.deleteBacklogDevelopment(backlog_code);

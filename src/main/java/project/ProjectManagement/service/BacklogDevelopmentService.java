@@ -42,16 +42,21 @@ public class BacklogDevelopmentService {
     public BacklogDevelopment updateBacklogDevelopment(Long id, BacklogDevelopment backlogDev) throws BacklogDevelopmentException, ProjectNotFoundException {
         BacklogDevelopment updatedBacklogDev = backlogDevelopmentRepo.findBacklogDevelopmentById(id).orElseThrow(() -> new BacklogDevelopmentException("Backlog Development Not Found"));
 
-        updatedBacklogDev.setBacklog_status("DEV");
+        updatedBacklogDev.setBacklog_status(backlogDev.getBacklog_status());
         updatedBacklogDev.setBacklog_start(backlogDev.getBacklog_start());
         updatedBacklogDev.setBacklog_end(backlogDev.getBacklog_end());
+        updatedBacklogDev.setPic_PM(backlogDev.getPic_PM());
         updatedBacklogDev.setModify_date(new Date());
 
         Project updatedProject = projectRepo.findByProject_code(updatedBacklogDev.getBacklog_code()).orElseThrow(() -> new ProjectNotFoundException("Project Not Found"));
-        updatedProject.setProject_status("DEV");
+        updatedProject.setProject_status(backlogDev.getBacklog_status());
 
         projectRepo.save(updatedProject);
         return backlogDevelopmentRepo.save(updatedBacklogDev);
+    }
+
+    public List<Long> countBacklogByStatus(String status){
+        return backlogDevelopmentRepo.countBacklogDevelopmentByBacklog_status(status);
     }
 
     public void deleteBacklogDevelopment(String backlog_code){

@@ -25,7 +25,7 @@ public class ProjectPIC {
 
     private Date modify_date;
 
-    @Column(length = 14)
+    @Column(length = 20)
     private String project_code; //ambil project code
 
     @Column(length = 25)
