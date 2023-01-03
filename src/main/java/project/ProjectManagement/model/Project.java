@@ -42,7 +42,7 @@ public class Project {
 
     private Date project_kickoff;
 
-    @Column(length = 3)
+    @Column(length = 20)
     private String project_status;
 
     public Project(){

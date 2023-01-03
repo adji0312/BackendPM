@@ -84,8 +84,8 @@ public class JwtTokenUtil implements Serializable {
 //        return generateToken((JwtUser) clamis);
     }
 
-    private String generateToken(Map<String, Object> clamis){
-        return Jwts.builder().setClaims(clamis).setExpiration(generateExpirationDate()).signWith(SignatureAlgorithm.HS512, secret).compact();
+    private String generateToken(Map<String, Object> claims){
+        return Jwts.builder().setClaims(claims).setExpiration(generateExpirationDate()).signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     private Date generateExpirationDate() {

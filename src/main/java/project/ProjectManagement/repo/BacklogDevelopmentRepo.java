@@ -23,8 +23,9 @@ public interface BacklogDevelopmentRepo extends JpaRepository<BacklogDevelopment
 //    @Query("SELECT u FROM BacklogDevelopment u WHERE u.backlog_status = 'KIC' OR u.backlog_status = 'DEV'  ")
     List<BacklogDevelopment> findAll();
 
-    @Query(value = "SELECT COUNT(u) FROM BacklogDevelopment u GROUP BY u.backlog_status")
-    List<Long> countBacklogDevelopmentByBacklog_status(@Param("status") String status);
+    @Query(value = "SELECT COUNT(u) FROM BacklogDevelopment u WHERE u.backlog_status = :status GROUP BY u.backlog_status")
+    Integer countBacklogDevelopmentByBacklog_status(@Param("status") String status);
+
 
     @Modifying
     @Query("DELETE FROM BacklogDevelopment WHERE backlog_code = :backlog_code")

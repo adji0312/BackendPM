@@ -10,6 +10,7 @@ import project.ProjectManagement.repo.BacklogDevelopmentRepo;
 import project.ProjectManagement.repo.ProjectRepo;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -55,8 +56,16 @@ public class BacklogDevelopmentService {
         return backlogDevelopmentRepo.save(updatedBacklogDev);
     }
 
-    public List<Long> countBacklogByStatus(String status){
-        return backlogDevelopmentRepo.countBacklogDevelopmentByBacklog_status(status);
+    public List<Integer> countBacklogByStatus(){
+        ArrayList<Integer> countArray = new ArrayList<Integer>();
+
+        String[] statusLabel = {"KIC", "DEV", "SIT", "READY UAT"};
+
+        for (String stat: statusLabel) {
+            countArray.add(backlogDevelopmentRepo.countBacklogDevelopmentByBacklog_status(stat));
+        }
+
+        return countArray;
     }
 
     public void deleteBacklogDevelopment(String backlog_code){
