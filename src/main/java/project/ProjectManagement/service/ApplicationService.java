@@ -32,6 +32,16 @@ public class ApplicationService {
         return applicationRepo.findApplicationsById(id).orElseThrow(() -> new ApplicationException("Application Not Found"));
     }
 
+    public void deleteApplication(Long id) throws ApplicationException{
+        Application deletedApp = applicationRepo.findApplicationsById(id).orElseThrow(() -> new ApplicationException("Application Not Found"));
+        applicationRepo.delete(deletedApp);
+    }
+
+    public Application updateApplication(Long id, Application application) throws ApplicationException{
+        Application updatedApplication = applicationRepo.findApplicationsById(id).orElseThrow(() -> new ApplicationException("Application Not Found"));
+        return applicationRepo.save(updatedApplication);
+    }
+
 //    public Application addApplication(Application application){
 //
 //    }

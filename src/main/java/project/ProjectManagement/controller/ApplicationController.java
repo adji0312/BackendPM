@@ -34,4 +34,16 @@ public class ApplicationController {
         Application application = applicationService.getApplicationById(id);
         return new ResponseEntity<>(application, HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Application> deleteApplication(@PathVariable("id") Long id){
+        applicationService.deleteApplication(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Application> updateApplication(@PathVariable("id") Long id, @RequestBody Application application){
+        Application updateApplication = applicationService.updateApplication(id, application);
+        return new ResponseEntity<>(updateApplication, HttpStatus.OK);
+    }
 }
