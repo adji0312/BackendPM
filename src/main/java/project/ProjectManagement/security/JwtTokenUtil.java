@@ -74,14 +74,10 @@ public class JwtTokenUtil implements Serializable {
     }
 
     public String generateToken(JwtUser userDetails) {
-        Map<String, Object> clamis = new HashMap<String, Object>();
-        clamis.put(CLAM_KEY_USERNAME, userDetails.getUsername());
-        clamis.put(CLAM_KEY_CREATED, new Date());
-        return generateToken(clamis);
-//        Map<String, Object> clamis = new HashMap<String, Object>();
-//        clamis.put(CLAM_KEY_USERNAME, userDetails.getUsername());
-//        clamis.put(CLAM_KEY_CREATED, new Date());
-//        return generateToken((JwtUser) clamis);
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(CLAM_KEY_USERNAME, userDetails.getUsername());
+        claims.put(CLAM_KEY_CREATED, new Date());
+        return generateToken(claims);
     }
 
     private String generateToken(Map<String, Object> claims){
